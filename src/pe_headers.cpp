@@ -96,6 +96,19 @@ namespace peforge {
         }
     }
 
+    DWORD get_entry_point(IN const BYTE* pe_buffer) {
+        BYTE *nt_hdrs = get_nt_headers(pe_buffer);
+        if (!nt_hdrs) return 0;
+
+        if (is_64bit(pe_buffer)) {
+            const IMAGE_NT_HEADERS64* nt_hdrs64 = reinterpret_cast<const IMAGE_NT_HEADERS64*>(nt_hdrs);
+            return nt_hdrs64->OptionalHeader.AddressOfEntryPoint;
+        } else {
+            const IMAGE_NT_HEADERS32* nt_hdrs32 = reinterpret_cast<const IMAGE_NT_HEADERS32*>(nt_hdrs);
+            return nt_hdrs32->OptionalHeader.AddressOfEntryPoint;
+        }
+    }
+
     bool update_entry_point(IN OUT BYTE *pe_buffer, IN DWORD new_ep) {
         BYTE *nt_hdrs = get_nt_headers(pe_buffer);
         if (nt_hdrs == nullptr) return false;

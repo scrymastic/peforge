@@ -70,6 +70,13 @@ namespace peforge {
     IMAGE_DATA_DIRECTORY *get_directory_entry(IN const BYTE* pe_buffer, IN DWORD dir_id);
 
     /**
+     * Get the entry point of the PE.
+     * @param pe_buffer: The PE buffer.
+     * @return: The entry point.
+     */
+    DWORD get_entry_point(IN const BYTE* pe_buffer);
+
+    /**
     * Update the entry point of the PE.
     * @param pe_buffer: The PE buffer.
     * @param new_ep: The new entry point.
