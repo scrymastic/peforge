@@ -34,6 +34,8 @@ namespace peforge {
     /**
     * Get the section header from the PE buffer.
     * @param pe_buffer: The PE buffer.
+    * @param section_idx: The index of the section.
+    * @param is_raw: If true, use raw offset, otherwise use virtual address.
     * @return: The section header.
     */
     IMAGE_SECTION_HEADER *get_section_header(IN const BYTE* pe_buffer, IN DWORD section_idx);
