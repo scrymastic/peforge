@@ -17,10 +17,10 @@ namespace peforge {
     * Check if the given field is within the given buffer.
     * @param buffer: The buffer to check.
     * @param buffer_size: The size of the buffer.
-    * @param field: The field to check.
-    * @param field_size: The size of the field.
-    * @return: True if the field is within the buffer, false otherwise.
+    * @param ptr: The pointer to check.
+    * @param ptr_size: The size of the pointer.
+    * @return: True if the pointer is within the buffer, false otherwise.
     */
-    bool is_field_within_buffer(IN const BYTE* buffer, IN DWORD buffer_size, IN const BYTE* field, IN DWORD field_size);
+    bool is_ptr_valid(IN const BYTE* buffer, IN DWORD buffer_size, IN const BYTE* ptr, IN DWORD ptr_size);
 
 }

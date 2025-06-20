@@ -1,7 +1,7 @@
 #include "../include/peforge/resource_util.hpp"
 
 namespace peforge {
-    BYTE* get_resource(IN int res_id, IN LPCWSTR res_type, IN HMODULE hInstance, OUT DWORD* size) {
+    BYTE* get_resource(IN HMODULE hInstance, IN int res_id, IN LPCWSTR res_type, OUT DWORD* size) {
         if (!res_id || !res_type || !hInstance || !size) return nullptr;
 
         // Get the resource from the PE

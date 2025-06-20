@@ -4,13 +4,13 @@
 namespace peforge {
     BYTE* get_minimum_cave(IN const BYTE* pe_buffer, IN DWORD required_size, OUT DWORD* cave_size) {
         *cave_size = 0;
-        BYTE *file_header = get_file_header(pe_buffer);
+        IMAGE_FILE_HEADER *file_header = get_file_header(pe_buffer);
         if (file_header == nullptr) return nullptr;
 
         // Section headers start after NT headers
         size_t opt_header_size = is_64bit(pe_buffer) ? sizeof(IMAGE_OPTIONAL_HEADER64) : sizeof(IMAGE_OPTIONAL_HEADER32);
         const IMAGE_SECTION_HEADER* sections = reinterpret_cast<const IMAGE_SECTION_HEADER*>(
-            file_header + sizeof(IMAGE_FILE_HEADER) + opt_header_size);
+            reinterpret_cast<const BYTE*>(file_header) + sizeof(IMAGE_FILE_HEADER) + opt_header_size);
 
         DWORD min_cave_size = ULONG_MAX;
         BYTE* min_cave_ptr = nullptr;

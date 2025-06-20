@@ -20,11 +20,11 @@ namespace peforge {
         return false;
     }
 
-    bool is_field_within_buffer(IN const BYTE* buffer, IN DWORD buffer_size, IN const BYTE* field, IN DWORD field_size) {
-        if (!buffer || !field) return false;
+    bool is_ptr_valid(IN const BYTE* buffer, IN DWORD buffer_size, IN const BYTE* ptr, IN DWORD ptr_size) {
+        if (!buffer || !ptr) return false;
 
-        // Check if the field is within the buffer
-        if (field >= buffer && field + field_size <= buffer + buffer_size) {
+        // Check if the ptr is within the buffer
+        if (ptr >= buffer && ptr + ptr_size <= buffer + buffer_size) {
             return true;
         }
 
