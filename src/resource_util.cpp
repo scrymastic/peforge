@@ -6,7 +6,7 @@ namespace peforge {
 
         // Get the resource from the PE
         HMODULE hModule = hInstance;
-        HRSRC hResource = FindResource(hModule, MAKEINTRESOURCE(res_id), res_type);
+        HRSRC hResource = FindResourceW(hModule, (LPCWSTR)MAKEINTRESOURCEW(res_id), res_type);
         if (!hResource) return nullptr;
 
         // Load the resource

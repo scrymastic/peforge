@@ -11,5 +11,5 @@ namespace peforge {
     * @param size: The size of the resource.
     * @return: The resource.
     */
-    BYTE* get_resource(IN HMODULE hInstance, IN int res_id, IN LPSTR res_type, OUT DWORD* size);
+    BYTE* get_resource(IN HMODULE hInstance, IN int res_id, IN LPCWSTR res_type, OUT DWORD* size);
 }
