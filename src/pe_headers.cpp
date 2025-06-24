@@ -40,17 +40,14 @@ namespace peforge {
     }
 
     IMAGE_SECTION_HEADER *get_section_header(IN const BYTE* pe_buffer, IN DWORD section_idx) {
-        BYTE *nt_hdrs = get_nt_headers(pe_buffer);
-        if (!nt_hdrs) return nullptr;
+        BYTE* nt_hdrs_ptr = get_nt_headers(pe_buffer);
+        if (nt_hdrs_ptr == nullptr) return nullptr;
 
-        DWORD optional_header_size = is_64bit(pe_buffer) ? sizeof(IMAGE_OPTIONAL_HEADER64) : sizeof(IMAGE_OPTIONAL_HEADER32);
+        IMAGE_NT_HEADERS* nt_hdrs = reinterpret_cast<IMAGE_NT_HEADERS*>(nt_hdrs_ptr);
 
-        DWORD section_offset = sizeof(DWORD) + // NT signature
-                              sizeof(IMAGE_FILE_HEADER) + // File header
-                              optional_header_size + // Optional header (size varies)
-                              (section_idx * sizeof(IMAGE_SECTION_HEADER)); // Section headers
+        IMAGE_SECTION_HEADER* sections = IMAGE_FIRST_SECTION(nt_hdrs);
 
-        return const_cast<IMAGE_SECTION_HEADER*>(reinterpret_cast<const IMAGE_SECTION_HEADER*>(nt_hdrs + section_offset));
+        return &sections[section_idx];
     }
 
     bool is_64bit(IN const BYTE* pe_buffer) {
